@@ -25,11 +25,14 @@ class MainActivity : AppCompatActivity() {
             data = m3UPlaylist
             listener = object : PlaylistAdapter.PlayItemSelectListener {
                 override fun onPlayItemSelected(m3UItem: M3UItem) {
-                    val intent = Intent(this@MainActivity, PlayerExo::class.java)
-                    intent.putExtra("Name", m3UItem.itemName)
-                    intent.putExtra("Url", m3UItem.itemUrl)
-                    Log.d(TAG, "$m3UItem selected")
-                    startActivity(intent)
+                    m3UItem.itemUrl?.let { url ->
+                        val intent = Intent(this@MainActivity, PlayerExo::class.java)
+                        intent.putExtra("Name", m3UItem.itemName)
+                        intent.putExtra("Url", url)
+                        Log.d(TAG, "$m3UItem selected")
+                        startActivity(intent)
+                    }
+
                 }
             }
         }

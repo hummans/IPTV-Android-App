@@ -21,7 +21,11 @@ public class PlayerExo extends AppCompatActivity implements com.devbrackets.andr
 
         videoView = findViewById(R.id.video_view);
         videoView.setOnPreparedListener(this);
-        videoView.setVideoURI(Uri.parse(bundle.getString("Url")));
+        try {
+            videoView.setVideoURI(Uri.parse(bundle.getString("Url")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

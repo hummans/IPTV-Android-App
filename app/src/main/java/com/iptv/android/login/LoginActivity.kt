@@ -5,13 +5,16 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.widget.Toast
 import com.iptv.android.m3u.M3UParser
 import com.iptv.android.R
 import com.iptv.android.list.MainActivity
 import com.iptv.android.m3u.M3UPlaylist
 import com.muparse.M3UItem
+import kotlinx.android.synthetic.main.activity_login.*
 import java.io.BufferedInputStream
 import java.net.URL
 
@@ -23,15 +26,28 @@ class LoginActivity : AppCompatActivity() {
     val progress_bar_type = 0
 
     // File url to download
-    private val file_url =
-        "http://goldiptv24.com/get.php?username=09e4OjOH4N&password=2X93EHak91&type=m3u_plus&output=ts"
+    private var file_url = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        DownloadFileFromURL().execute(file_url)
+        btnLogin.setOnClickListener {
+            file_url =
+                    "http://goldiptv24.com:80/get.php?username=${etUserName.text}&password=${etPassword.text}&type=m3u_plus&output=ts"
+            DownloadFileFromURL().execute(file_url)
+        }
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this@LoginActivity)
+        val username: String? = sharedPreferences.getString("USERNAME", null)
+        val password: String? = sharedPreferences.getString("PASSWORD", null)
+        username?.let { etUserName.setText(it) }
+        password?.let { etPassword.setText(it) }
+        if (username != null && password != null) {
+            btnLogin.performClick()
+        }
+
     }
 
     /**
@@ -44,10 +60,9 @@ class LoginActivity : AppCompatActivity() {
             -> {
                 pDialog = ProgressDialog(this)
                 pDialog?.let { pDialog ->
-                    pDialog.setMessage("Downloading file. Please wait...")
-                    pDialog.isIndeterminate = false
-                    pDialog.max = 100
-                    pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
+                    pDialog.setMessage("Giriş yapılıyor. Lütfen bekleyiniz...")
+                    pDialog.isIndeterminate = true
+                    pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
                     pDialog.setCancelable(false)
                     pDialog.show()
                 }
@@ -118,9 +133,17 @@ class LoginActivity : AppCompatActivity() {
             } catch (e: Exception) {
             }
             if (m3UPlaylist != null && m3UPlaylist.playlistItems != null && m3UPlaylist.playlistItems.size > 0) {
+
+                val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this@LoginActivity)
+                sharedPreferences.edit().putString("USERNAME", etUserName.text.toString()).apply()
+                sharedPreferences.edit().putString("PASSWORD", etPassword.text.toString()).apply()
+
                 MainActivity.m3UPlaylist = m3UPlaylist.playlistItems
                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-
+                finish()
+            } else {
+                Toast.makeText(this@LoginActivity, "Kullanıcı Adı ya da şifrenizi hatalı girdiniz.", Toast.LENGTH_LONG)
+                    .show()
             }
 
         }

@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.amulyakhare.textdrawable.TextDrawable
+import com.amulyakhare.textdrawable.util.ColorGenerator
 import com.iptv.android.R
 import com.muparse.M3UItem
 import kotlinx.android.synthetic.main.item_playlist.view.*
@@ -31,12 +33,19 @@ class PlaylistAdapter : RecyclerView.Adapter<PlaylistAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(data[position], listener)
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val icon: ImageView = itemView.cimg
+        val icon: ImageView = itemView.iv_channel
         val name: TextView = itemView.item_name
 
         fun bind(model: M3UItem, listener: PlayItemSelectListener?) {
             name.text = model.itemName
-            listener?.let { listener.onPlayItemSelected(model) }
+
+            var char = "A"
+            model.itemName?.let { char = it[0].toString() }
+            val textDrawable = TextDrawable.builder()
+                .buildRoundRect(char, ColorGenerator.MATERIAL.randomColor, 100)
+            icon.setImageDrawable(textDrawable)
+
+            itemView.setOnClickListener { listener?.let { listener.onPlayItemSelected(model) } }
         }
     }
 
