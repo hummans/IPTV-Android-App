@@ -31,15 +31,31 @@
                     android:layout_margin="10dp"
                     android:contentDescription="@string/browse"/>
 
-            <TextView
-                    android:id="@+id/item_name"
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="1"
-                    android:text="Name"
-                    android:textColor="#000"
-                    android:textSize="22sp"
-                    android:layout_marginStart="4dp"/>
+                    android:layout_marginStart="4dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:id="@+id/item_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:text="Name"
+                        android:textStyle="bold"
+                        android:textColor="#000"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="5dp"/>
+
+                <TextView
+                        android:id="@+id/tv_total_count"
+                        android:text="Toplam Yayın : 5"
+                        android:textSize="12sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+            </LinearLayout>
+
         </LinearLayout>
 
     </RelativeLayout>

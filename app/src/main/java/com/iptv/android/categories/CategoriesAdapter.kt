@@ -1,4 +1,4 @@
-package com.iptv.android.list
+package com.iptv.android.categories
 
 /**
  * Developed by tcbaras on 25.02.2019.
@@ -15,24 +15,24 @@ import android.widget.TextView
 import com.amulyakhare.textdrawable.TextDrawable
 import com.amulyakhare.textdrawable.util.ColorGenerator
 import com.iptv.android.R
-import com.muparse.M3UItem
-import kotlinx.android.synthetic.main.item_playlist.view.*
+import com.iptv.android.m3u.M3UPlaylist
+import kotlinx.android.synthetic.main.item_category.view.*
 import kotlin.properties.Delegates
 
-class PlaylistAdapter : RecyclerView.Adapter<PlaylistAdapter.ViewHolder>(), Filterable {
+class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>(), Filterable {
 
-    internal var data: List<M3UItem> by Delegates.observable(emptyList()) { _, _, _ ->
+    internal var data: List<M3UPlaylist> by Delegates.observable(emptyList()) { _, _, _ ->
         filteredData.clear()
         filteredData.addAll(data)
         notifyDataSetChanged()
     }
 
-    private var filteredData: MutableList<M3UItem> = mutableListOf()
+    private var filteredData: MutableList<M3UPlaylist> = mutableListOf()
 
-    internal var listener: PlayItemSelectListener? = null
+    internal var listener: CategorySelectListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_playlist, parent, false))
+        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false))
 
     override fun getItemCount() = filteredData.size
 
@@ -41,18 +41,23 @@ class PlaylistAdapter : RecyclerView.Adapter<PlaylistAdapter.ViewHolder>(), Filt
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val icon: ImageView = itemView.iv_channel
         val name: TextView = itemView.item_name
+        val totalCount: TextView = itemView.tv_total_count
 
-        fun bind(model: M3UItem, listener: PlayItemSelectListener?) {
-            name.text = model.itemName
+        fun bind(model: M3UPlaylist, listener: CategorySelectListener?) {
+            name.text = model.playlistName
 
-//            var char = "A"
-//            model.itemName?.let { char = it[0].toString() }
-//            val textDrawable = TextDrawable.builder()
-//                .buildRoundRect(char, ColorGenerator.MATERIAL.randomColor, 100)
-//            icon.setImageDrawable(textDrawable)
-            icon.setImageResource(R.drawable.tv)
+            var char = "A"
+//            model.playlistName?.let {
+//                if (it.isNotEmpty()) {
+//                    char = it[0].toString()
+//                }
+//            }
+            val textDrawable = TextDrawable.builder()
+                .buildRoundRect((adapterPosition + 1).toString(), ColorGenerator.MATERIAL.randomColor, 100)
+            icon.setImageDrawable(textDrawable)
+            model.playlistItems?.let { totalCount.text = "Toplam Yayın: ${model.playlistItems.size}" }
 
-            itemView.setOnClickListener { listener?.let { listener.onPlayItemSelected(model) } }
+            itemView.setOnClickListener { listener?.let { listener.onCategorySelected(model) } }
         }
     }
 
@@ -64,10 +69,10 @@ class PlaylistAdapter : RecyclerView.Adapter<PlaylistAdapter.ViewHolder>(), Filt
                     filteredData.addAll(data)
                 } else {
                     filteredData.clear()
-                    for (m3U in data) {
-                        m3U.itemName?.let {
+                    for (category in data) {
+                        category.playlistName?.let {
                             if (it.contains(query, ignoreCase = true)) {
-                                filteredData.add(m3U)
+                                filteredData.add(category)
                             }
                         }
                     }
@@ -80,7 +85,7 @@ class PlaylistAdapter : RecyclerView.Adapter<PlaylistAdapter.ViewHolder>(), Filt
 
             override fun publishResults(query: CharSequence?, filterResults: FilterResults?) {
                 try {
-                    filteredData = filterResults?.values as ArrayList<M3UItem>
+                    filteredData = filterResults?.values as MutableList<M3UPlaylist>
                     notifyDataSetChanged()
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -90,7 +95,7 @@ class PlaylistAdapter : RecyclerView.Adapter<PlaylistAdapter.ViewHolder>(), Filt
     }
 
 
-    interface PlayItemSelectListener {
-        fun onPlayItemSelected(m3UItem: M3UItem)
+    interface CategorySelectListener {
+        fun onCategorySelected(category: M3UPlaylist)
     }
 }

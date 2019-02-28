@@ -11,9 +11,8 @@ import android.util.Log
 import android.widget.Toast
 import com.iptv.android.m3u.M3UParser
 import com.iptv.android.R
-import com.iptv.android.list.MainActivity
+import com.iptv.android.categories.CategoriesActivity
 import com.iptv.android.m3u.M3UPlaylist
-import com.muparse.M3UItem
 import kotlinx.android.synthetic.main.activity_login.*
 import java.io.BufferedInputStream
 import java.net.URL
@@ -74,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    internal inner class DownloadFileFromURL : AsyncTask<String, String, M3UPlaylist>() {
+    internal inner class DownloadFileFromURL : AsyncTask<String, String, List<M3UPlaylist>>() {
 
         /**
          * Before starting background thread Show Progress Bar Dialog
@@ -87,7 +86,7 @@ class LoginActivity : AppCompatActivity() {
         /**
          * Downloading file in background thread
          */
-        override fun doInBackground(vararg f_url: String): M3UPlaylist? {
+        override fun doInBackground(vararg f_url: String): List<M3UPlaylist>? {
             var count: Int
             try {
                 val url = URL(f_url[0])
@@ -104,7 +103,7 @@ class LoginActivity : AppCompatActivity() {
                     8192
                 )
 
-                val playlist = M3UParser().parseFile(input)
+                val playlist = M3UParser().parseM3UFile(input)
                 input.close()
                 return playlist
 
@@ -126,20 +125,20 @@ class LoginActivity : AppCompatActivity() {
         /**
          * After completing background task Dismiss the progress dialog
          */
-        override fun onPostExecute(m3UPlaylist: M3UPlaylist?) {
+        override fun onPostExecute(categories: List<M3UPlaylist>?) {
             // dismiss the dialog after the file was downloaded
             try {
                 dismissDialog(progress_bar_type)
             } catch (e: Exception) {
             }
-            if (m3UPlaylist != null && m3UPlaylist.playlistItems != null && m3UPlaylist.playlistItems.size > 0) {
+            if (!categories.isNullOrEmpty()) {
 
                 val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this@LoginActivity)
                 sharedPreferences.edit().putString("USERNAME", etUserName.text.toString()).apply()
                 sharedPreferences.edit().putString("PASSWORD", etPassword.text.toString()).apply()
 
-                MainActivity.m3UPlaylist = m3UPlaylist.playlistItems
-                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                CategoriesActivity.categories = categories
+                startActivity(Intent(this@LoginActivity, CategoriesActivity::class.java))
                 finish()
             } else {
                 Toast.makeText(this@LoginActivity, "Kullanıcı Adı ya da şifrenizi hatalı girdiniz.", Toast.LENGTH_LONG)

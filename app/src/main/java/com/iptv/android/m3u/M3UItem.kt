@@ -8,5 +8,6 @@ class M3UItem : Serializable {
     var itemName: String? = null
     var itemUrl: String? = null
     var itemIcon: String? = null
+    var groupTitle: String? = null
 
 }

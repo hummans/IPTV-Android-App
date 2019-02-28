@@ -1,4 +1,4 @@
-package com.iptv.android.list
+package com.iptv.android.categories
 
 import android.app.SearchManager
 import android.content.Context
@@ -10,33 +10,31 @@ import android.support.v7.widget.SearchView
 import android.util.Log
 import android.view.Menu
 import com.iptv.android.R
-import com.iptv.android.player.PlayerExo
-import com.muparse.M3UItem
-import kotlinx.android.synthetic.main.activity_main.*
+import com.iptv.android.list.ListActivity
+import com.iptv.android.m3u.M3UPlaylist
+import kotlinx.android.synthetic.main.activity_categories.*
 
+class CategoriesActivity : AppCompatActivity() {
 
-class MainActivity : AppCompatActivity() {
-
-    private val adapter = PlaylistAdapter()
+    private val adapter = CategoriesAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_categories)
 
-        rvPlayList.setHasFixedSize(true)
+        rvCategories.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rvPlayList.layoutManager = layoutManager
-        rvPlayList.adapter = adapter
+        rvCategories.layoutManager = layoutManager
+        rvCategories.adapter = adapter
 
         adapter.apply {
-            data = m3UPlaylist
-            listener = object : PlaylistAdapter.PlayItemSelectListener {
-                override fun onPlayItemSelected(m3UItem: M3UItem) {
-                    m3UItem.itemUrl?.let { url ->
-                        val intent = Intent(this@MainActivity, PlayerExo::class.java)
-                        intent.putExtra("Name", m3UItem.itemName)
-                        intent.putExtra("Url", url)
-                        Log.d(TAG, "$m3UItem selected")
+            data = categories
+            listener = object : CategoriesAdapter.CategorySelectListener {
+                override fun onCategorySelected(category: M3UPlaylist) {
+                    category.playlistName?.let { name ->
+                        Log.d(TAG, "$name category selected")
+                        val intent = Intent(this@CategoriesActivity, ListActivity::class.java)
+                        ListActivity.m3UPlaylist = category.playlistItems
                         startActivity(intent)
                     }
                 }
@@ -74,7 +72,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        val TAG = MainActivity::class.java.simpleName
-        var m3UPlaylist: List<M3UItem> = listOf()
+        val TAG = CategoriesActivity::class.java.simpleName
+        var categories: List<M3UPlaylist> = listOf()
     }
 }

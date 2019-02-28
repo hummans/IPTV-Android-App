@@ -5,10 +5,7 @@ import com.muparse.M3UItem;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.util.*;
 
 public class M3UParser {
 
@@ -17,6 +14,7 @@ public class M3UParser {
     private static final String EXT_INF = "#EXTINF:";
     private static final String EXT_PLAYLIST_NAME = "#PLAYLIST";
     private static final String EXT_LOGO = "tvg-logo";
+    private static final String EXT_GROUP_TITLE = "group-title";
     private static final String EXT_URL = "http://";
 
     public String convertStreamToString(InputStream is) {
@@ -27,7 +25,7 @@ public class M3UParser {
         }
     }
 
-    public M3UPlaylist parseFile(InputStream inputStream) throws FileNotFoundException {
+    private M3UPlaylist parseFile(InputStream inputStream) throws FileNotFoundException {
         Log.d(TAG, "parseFile() called with: inputStream = [" + inputStream + "]");
         M3UPlaylist m3UPlaylist = new M3UPlaylist();
         List<M3UItem> playlistItems = new ArrayList<>();
@@ -40,11 +38,9 @@ public class M3UParser {
                 if (currLine.contains(EXT_PLAYLIST_NAME)) {
                     String fileParams = currLine.substring(EXT_M3U.length(), currLine.indexOf(EXT_PLAYLIST_NAME));
                     String playListName = currLine.substring(currLine.indexOf(EXT_PLAYLIST_NAME) + EXT_PLAYLIST_NAME.length()).replace(":", "");
-                    m3UPlaylist.setPlaylistName(playListName);
-                    m3UPlaylist.setPlaylistParams(fileParams);
+                    m3UPlaylist.playlistName = playListName;
                 } else {
-                    m3UPlaylist.setPlaylistName("Noname Playlist");
-                    m3UPlaylist.setPlaylistParams("No Params");
+                    m3UPlaylist.playlistName = "Noname Playlist";
                 }
             } else {
                 M3UItem playlistItem = new M3UItem();
@@ -59,6 +55,10 @@ public class M3UParser {
                     playlistItem.setItemDuration(duration);
                     playlistItem.setItemIcon("");
                 }
+                if (dataArray[0].contains(EXT_GROUP_TITLE)) {
+                    String groupTitle = dataArray[0].substring(dataArray[0].indexOf(EXT_GROUP_TITLE) + EXT_GROUP_TITLE.length()).replace("=", "").replace("\"", "").replace("\n", "");
+                    playlistItem.setGroupTitle(groupTitle);
+                }
                 try {
                     String url = dataArray[1].substring(dataArray[1].indexOf(EXT_URL)).replace("\n", "").replace("\r", "");
                     String name = dataArray[1].substring(0, dataArray[1].indexOf(EXT_URL)).replace("\n", "");
@@ -70,7 +70,42 @@ public class M3UParser {
                 playlistItems.add(playlistItem);
             }
         }
-        m3UPlaylist.setPlaylistItems(playlistItems);
+        m3UPlaylist.playlistItems = playlistItems;
         return m3UPlaylist;
+    }
+
+    public List<M3UPlaylist> parseM3UFile(InputStream inputStream) {
+        Map<String, M3UPlaylist> data = new TreeMap<String, M3UPlaylist>();
+        try {
+            M3UPlaylist m3UPlaylist = parseFile(inputStream);
+            if (m3UPlaylist.playlistItems != null) {
+                for (M3UItem m3u : m3UPlaylist.playlistItems) {
+                    if (m3u.getGroupTitle() == null || m3u.getGroupTitle().equals("") || m3u.getGroupTitle().startsWith("***")) {
+                        continue;
+                    }
+                    if (!data.containsKey(m3u.getGroupTitle())) {
+                        M3UPlaylist playlist = new M3UPlaylist();
+                        playlist.playlistName = m3u.getGroupTitle();
+                        playlist.playlistItems.add(m3u);
+                        data.put(m3u.getGroupTitle(), playlist);
+                    } else {
+                        if (m3u.getGroupTitle() != null && data.get(m3u.getGroupTitle()) != null) {
+                            data.get(m3u.getGroupTitle()).playlistItems.add(m3u);
+                        }
+
+                    }
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        List<M3UPlaylist> retList = new ArrayList<>();
+        for (String key : data.keySet()) {
+            retList.add(data.get(key));
+        }
+
+        return retList;
     }
 }
