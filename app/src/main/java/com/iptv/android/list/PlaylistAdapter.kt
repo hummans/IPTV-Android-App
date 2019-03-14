@@ -17,6 +17,7 @@ import com.amulyakhare.textdrawable.util.ColorGenerator
 import com.iptv.android.R
 import com.muparse.M3UItem
 import kotlinx.android.synthetic.main.item_playlist.view.*
+import java.util.*
 import kotlin.properties.Delegates
 
 class PlaylistAdapter : RecyclerView.Adapter<PlaylistAdapter.ViewHolder>(), Filterable {
@@ -44,16 +45,13 @@ class PlaylistAdapter : RecyclerView.Adapter<PlaylistAdapter.ViewHolder>(), Filt
 
         fun bind(model: M3UItem, listener: PlayItemSelectListener?) {
             name.text = model.itemName
-
-//            var char = "A"
-//            model.itemName?.let { char = it[0].toString() }
-//            val textDrawable = TextDrawable.builder()
-//                .buildRoundRect(char, ColorGenerator.MATERIAL.randomColor, 100)
-//            icon.setImageDrawable(textDrawable)
-            icon.setImageResource(R.drawable.tv)
+   //         icon.setImageResource(icons[adapterPosition % icons.size])
 
             itemView.setOnClickListener { listener?.let { listener.onPlayItemSelected(model) } }
         }
+
+        private var icons =
+            listOf(R.drawable.tv2, R.drawable.tv3, R.drawable.tv4, R.drawable.tv5, R.drawable.tv6, R.drawable.tv7)
     }
 
     override fun getFilter(): Filter {

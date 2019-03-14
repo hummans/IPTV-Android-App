@@ -26,6 +26,7 @@
 
             <ImageView
                     android:id="@+id/iv_channel"
+                    android:src="@drawable/tv"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
@@ -51,7 +52,8 @@
                 <TextView
                         android:id="@+id/tv_total_count"
                         android:text="Toplam Yayın : 5"
-                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
             </LinearLayout>

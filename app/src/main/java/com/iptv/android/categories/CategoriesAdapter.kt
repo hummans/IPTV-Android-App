@@ -46,15 +46,15 @@ class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>(), 
         fun bind(model: M3UPlaylist, listener: CategorySelectListener?) {
             name.text = model.playlistName
 
-            var char = "A"
+//            var char = "A"
 //            model.playlistName?.let {
 //                if (it.isNotEmpty()) {
 //                    char = it[0].toString()
 //                }
 //            }
-            val textDrawable = TextDrawable.builder()
-                .buildRoundRect((adapterPosition + 1).toString(), ColorGenerator.MATERIAL.randomColor, 100)
-            icon.setImageDrawable(textDrawable)
+//            val textDrawable = TextDrawable.builder()
+//                .buildRoundRect((adapterPosition + 1).toString(), ColorGenerator.MATERIAL.randomColor, 100)
+//            icon.setImageDrawable(textDrawable)
             model.playlistItems?.let { totalCount.text = "Toplam Yayın: ${model.playlistItems.size}" }
 
             itemView.setOnClickListener { listener?.let { listener.onCategorySelected(model) } }

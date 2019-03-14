@@ -2,65 +2,118 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@android:color/white"
                 android:fitsSystemWindows="true">
 
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+    <ScrollView
             android:layout_centerInParent="true"
-            android:paddingTop="56dp"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp">
-
-        <ImageView android:src="@drawable/tv"
-                   android:layout_width="wrap_content"
-                   android:layout_height="100dp"
-                   android:layout_marginBottom="24dp"
-                   android:layout_gravity="center_horizontal"/>
-
-        <!-- Email Label -->
-        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/etUserName"
-                      android:layout_width="match_parent"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp">
+
+            <ImageView android:src="@drawable/iptvmedya"
+                       android:layout_width="wrap_content"
+                       android:layout_height="200dp"
+                       android:layout_marginBottom="24dp"
+                       android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                    android:textSize="22sp"
+                    android:text="@string/app_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center"/>
+
+            <!-- Email Label -->
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
+                <EditText android:id="@+id/etUserName"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:inputType="text"
+                          android:hint="Kullanıcı Adı"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Password Label -->
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
+                <EditText android:id="@+id/etPassword"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:inputType="textPassword"
+                          android:hint="Şifre"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <CheckBox android:id="@+id/cbRememberMe" android:text="Beni Hatırla" android:layout_width="match_parent"
+                      android:layout_height="wrap_content"/>
+
+            <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btnLogin"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="18dp"
+                    android:padding="12dp"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/black"
+                    android:drawableRight="@drawable/ic_arrow_right_white"
+                    android:text="Giriş"/>
+
+
+            <LinearLayout android:orientation="horizontal"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="center">
+
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                              android:gravity="center">
+                    <ImageView android:id="@+id/ivWeb" android:src="@drawable/web" android:layout_width="40dp"
+                               android:layout_height="40dp"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                              android:gravity="center">
+                    <ImageView android:id="@+id/ivInstagram" android:src="@drawable/instagram"
+                               android:layout_width="40dp" android:layout_height="40dp"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                              android:gravity="center">
+                    <ImageView android:id="@+id/ivSkype" android:src="@drawable/skype" android:layout_width="40dp"
+                               android:layout_height="40dp"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                              android:gravity="center">
+                    <ImageView android:id="@+id/ivSpeed" android:src="@drawable/speed" android:layout_width="40dp"
+                               android:layout_height="40dp"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                              android:gravity="center">
+                    <ImageView android:id="@+id/ivWhatsapp" android:src="@drawable/whatsapp" android:layout_width="40dp"
+                               android:layout_height="40dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView android:id="@+id/link_signup"
+                      android:layout_width="fill_parent"
                       android:layout_height="wrap_content"
-                      android:inputType="text"
-                      android:hint="Kullanıcı Adı"/>
-        </android.support.design.widget.TextInputLayout>
-
-        <!-- Password Label -->
-        <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/etPassword"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:inputType="textPassword"
-                      android:hint="Şifre"/>
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btnLogin"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:padding="12dp"
-                android:text="Giriş"/>
-
-        <TextView android:id="@+id/link_signup"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginBottom="24dp"
-                  android:text="Hesabınız yok mu? Üye olun"
-                  android:gravity="center"
-                  android:textSize="16dip"/>
-
-    </LinearLayout>
+                      android:layout_marginBottom="24dp"
+                      android:text="IPTV Medya v1.0"
+                      android:gravity="center"
+                      android:textSize="12sp"
+                      android:textColor="@android:color/darker_gray"
+                      android:layout_marginTop="20dp"/>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

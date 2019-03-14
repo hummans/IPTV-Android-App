@@ -3,6 +3,7 @@ package com.iptv.android.login
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -16,6 +17,10 @@ import com.iptv.android.m3u.M3UPlaylist
 import kotlinx.android.synthetic.main.activity_login.*
 import java.io.BufferedInputStream
 import java.net.URL
+import java.net.URLEncoder
+import android.content.pm.PackageManager
+import android.support.v4.content.ContextCompat.startActivity
+import android.content.ComponentName
 
 
 class LoginActivity : AppCompatActivity() {
@@ -32,7 +37,14 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        setOnClickListeners()
         btnLogin.setOnClickListener {
+
+            if (etUserName.text.isEmpty() || etPassword.text.isEmpty()) {
+                Toast.makeText(this, "Kullanıcı adı ve şifre boş olamaz!", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
             file_url =
                     "http://goldiptv24.com:80/get.php?username=${etUserName.text}&password=${etPassword.text}&type=m3u_plus&output=ts"
             DownloadFileFromURL().execute(file_url)
@@ -47,6 +59,64 @@ class LoginActivity : AppCompatActivity() {
             btnLogin.performClick()
         }
 
+    }
+
+    private fun setOnClickListeners() {
+        ivWeb.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.iptvmedya.com"))
+            startActivity(browserIntent)
+        }
+
+        ivInstagram.setOnClickListener { }
+
+        ivSkype.setOnClickListener {
+            if (isSkypeClientInstalled()) {
+                val skypeUri = Uri.parse("iptvmedya")
+                val myIntent = Intent(Intent.ACTION_VIEW, skypeUri)
+                myIntent.component = ComponentName("com.skype.raider", "com.skype.raider.Main")
+                myIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(myIntent)
+            }
+        }
+
+
+        ivSpeed.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.fast.com"))
+            startActivity(browserIntent)
+        }
+
+        ivWhatsapp.setOnClickListener {
+            try {
+                val gsm = "+32460242927"
+                val intent = Intent(Intent.ACTION_VIEW)
+                val url =
+                    "https://api.whatsapp.com/send?phone=" + gsm + "&text=" + URLEncoder.encode(
+                        "Merhaba IPTv,",
+                        "UTF-8"
+                    )
+                intent.setPackage("com.whatsapp")
+                intent.data = Uri.parse(url)
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivity(intent)
+                } else {
+
+                }
+            } catch (e: Exception) {
+                Log.e("ERROR WHATSAPP", e.toString())
+
+            }
+
+        }
+
+    }
+
+    fun isSkypeClientInstalled(): Boolean {
+        try {
+            packageManager.getPackageInfo("com.skype.raider", PackageManager.GET_ACTIVITIES)
+        } catch (e: PackageManager.NameNotFoundException) {
+            return false
+        }
+        return true
     }
 
     /**
@@ -133,9 +203,11 @@ class LoginActivity : AppCompatActivity() {
             }
             if (!categories.isNullOrEmpty()) {
 
-                val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this@LoginActivity)
-                sharedPreferences.edit().putString("USERNAME", etUserName.text.toString()).apply()
-                sharedPreferences.edit().putString("PASSWORD", etPassword.text.toString()).apply()
+                if (cbRememberMe.isChecked) {
+                    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this@LoginActivity)
+                    sharedPreferences.edit().putString("USERNAME", etUserName.text.toString()).apply()
+                    sharedPreferences.edit().putString("PASSWORD", etPassword.text.toString()).apply()
+                }
 
                 CategoriesActivity.categories = categories
                 startActivity(Intent(this@LoginActivity, CategoriesActivity::class.java))

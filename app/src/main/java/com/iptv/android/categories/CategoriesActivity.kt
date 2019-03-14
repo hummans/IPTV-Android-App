@@ -4,15 +4,19 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import com.iptv.android.R
 import com.iptv.android.list.ListActivity
+import com.iptv.android.login.LoginActivity
 import com.iptv.android.m3u.M3UPlaylist
 import kotlinx.android.synthetic.main.activity_categories.*
+import kotlinx.android.synthetic.main.activity_login.*
 
 class CategoriesActivity : AppCompatActivity() {
 
@@ -43,7 +47,7 @@ class CategoriesActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
+        menuInflater.inflate(R.menu.main_menu_with_exit, menu)
 
         // Associate searchable configuration with the SearchView
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
@@ -69,6 +73,19 @@ class CategoriesActivity : AppCompatActivity() {
             }
         })
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item?.itemId == R.id.action_logout){
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+            sharedPreferences.edit().putString("USERNAME", null).apply()
+            sharedPreferences.edit().putString("PASSWORD", null).apply()
+
+            startActivity(Intent(this@CategoriesActivity, LoginActivity::class.java))
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {
