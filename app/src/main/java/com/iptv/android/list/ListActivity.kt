@@ -33,6 +33,7 @@ class ListActivity : AppCompatActivity() {
             listener = object : PlaylistAdapter.PlayItemSelectListener {
                 override fun onPlayItemSelected(m3UItem: M3UItem) {
                     m3UItem.itemUrl?.let { url ->
+                        PlayerExo.m3UItem = m3UItem
                         val intent = Intent(this@ListActivity, PlayerExo::class.java)
                         intent.putExtra("Name", m3UItem.itemName)
                         intent.putExtra("Url", url)
