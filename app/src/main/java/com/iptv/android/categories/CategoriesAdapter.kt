@@ -39,24 +39,10 @@ class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>(), 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(filteredData[position], listener)
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val icon: ImageView = itemView.iv_channel
         val name: TextView = itemView.item_name
-        val totalCount: TextView = itemView.tv_total_count
 
         fun bind(model: M3UPlaylist, listener: CategorySelectListener?) {
             name.text = model.playlistName
-
-//            var char = "A"
-//            model.playlistName?.let {
-//                if (it.isNotEmpty()) {
-//                    char = it[0].toString()
-//                }
-//            }
-//            val textDrawable = TextDrawable.builder()
-//                .buildRoundRect((adapterPosition + 1).toString(), ColorGenerator.MATERIAL.randomColor, 100)
-//            icon.setImageDrawable(textDrawable)
-            model.playlistItems?.let { totalCount.text = "Toplam Yayın: ${model.playlistItems.size}" }
-
             itemView.setOnClickListener { listener?.let { listener.onCategorySelected(model) } }
         }
     }

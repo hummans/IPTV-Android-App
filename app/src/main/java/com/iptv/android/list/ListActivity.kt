@@ -12,7 +12,7 @@ import android.view.Menu
 import com.iptv.android.R
 import com.iptv.android.player.PlayerExo
 import com.muparse.M3UItem
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_list.*
 
 
 class ListActivity : AppCompatActivity() {
@@ -21,7 +21,7 @@ class ListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_list)
 
         rvPlayList.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

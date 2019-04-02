@@ -21,6 +21,7 @@ import java.net.URLEncoder
 import android.content.pm.PackageManager
 import android.support.v4.content.ContextCompat.startActivity
 import android.content.ComponentName
+import com.iptv.android.main.MainActivity
 
 
 class LoginActivity : AppCompatActivity() {
@@ -45,8 +46,9 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            file_url =
-                    "http://goldiptv24.com:80/get.php?username=${etUserName.text}&password=${etPassword.text}&type=m3u_plus&output=ts"
+//            file_url =
+//                    "http://goldiptv24.com:80/get.php?username=${etUserName.text}&password=${etPassword.text}&type=m3u_plus&output=ts"
+            file_url = "http://managercw.com:8000/get.php?username=${etUserName.text}&password=${etPassword.text}&type=m3u_plus&output=ts"
             DownloadFileFromURL().execute(file_url)
         }
 
@@ -209,8 +211,8 @@ class LoginActivity : AppCompatActivity() {
                     sharedPreferences.edit().putString("PASSWORD", etPassword.text.toString()).apply()
                 }
 
-                CategoriesActivity.categories = categories
-                startActivity(Intent(this@LoginActivity, CategoriesActivity::class.java))
+                MainActivity.categories = categories
+                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                 finish()
             } else {
                 Toast.makeText(this@LoginActivity, "Kullanıcı Adı ya da şifrenizi hatalı girdiniz.", Toast.LENGTH_LONG)

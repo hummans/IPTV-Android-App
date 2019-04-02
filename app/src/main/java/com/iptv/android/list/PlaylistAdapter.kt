@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.amulyakhare.textdrawable.TextDrawable
 import com.amulyakhare.textdrawable.util.ColorGenerator
+import com.bumptech.glide.Glide
 import com.iptv.android.R
 import com.muparse.M3UItem
 import kotlinx.android.synthetic.main.item_playlist.view.*
@@ -33,7 +34,7 @@ class PlaylistAdapter : RecyclerView.Adapter<PlaylistAdapter.ViewHolder>(), Filt
     internal var listener: PlayItemSelectListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_playlist, parent, false))
+        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_playlist3, parent, false))
 
     override fun getItemCount() = filteredData.size
 
@@ -45,7 +46,8 @@ class PlaylistAdapter : RecyclerView.Adapter<PlaylistAdapter.ViewHolder>(), Filt
 
         fun bind(model: M3UItem, listener: PlayItemSelectListener?) {
             name.text = model.itemName
-   //         icon.setImageResource(icons[adapterPosition % icons.size])
+          //  icon.setImageResource(icons[adapterPosition % icons.size])
+            Glide.with(icon.context).load(model.itemIcon).placeholder(R.drawable.placeholder).fitCenter().into(icon)
 
             itemView.setOnClickListener { listener?.let { listener.onPlayItemSelected(model) } }
         }

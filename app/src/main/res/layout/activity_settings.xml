@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                  android:orientation="vertical"
+                  android:padding="20dp">
+
+
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="0dp" android:layout_weight="1"
+                      android:paddingStart="20dp"
+                      android:paddingEnd="20dp"
+                      android:orientation="horizontal">
+
+            <RelativeLayout
+                    android:id="@+id/rlSet1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="#33000000"
+                    android:layout_margin="6dp"
+                    android:padding="4dp"
+                    android:orientation="vertical">
+
+                <TextView android:text="ACCOUNT" android:textColor="@android:color/white"
+                          android:layout_alignParentBottom="true"
+                          android:layout_margin="2dp" android:textAlignment="center" android:textStyle="bold"
+                          android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+                <ImageView android:id="@+id/ivSet1" android:src="@drawable/set_account" android:layout_width="wrap_content" android:tint="@color/selector_tint"
+                           android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/rlSet2"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="#33000000"
+                    android:layout_margin="6dp"
+                    android:padding="4dp"
+                    android:orientation="vertical">
+
+                <TextView android:text="VIDEO SIZE" android:textColor="@android:color/white"
+                          android:layout_alignParentBottom="true"
+                          android:layout_margin="2dp" android:textAlignment="center" android:textStyle="bold"
+                          android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+                <ImageView android:id="@+id/ivSet2" android:src="@drawable/set_videosize" android:layout_width="wrap_content" android:tint="@color/selector_tint"
+                           android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/rlSet3"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="#33000000"
+                    android:layout_margin="6dp"
+                    android:padding="4dp"
+                    android:orientation="vertical">
+
+                <TextView android:text="PLAYER" android:textColor="@android:color/white"
+                          android:layout_alignParentBottom="true"
+                          android:layout_margin="2dp" android:textAlignment="center" android:textStyle="bold"
+                          android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+                <ImageView android:id="@+id/ivSet3"  android:src="@drawable/set_player" android:layout_width="wrap_content" android:tint="@color/selector_tint"
+                           android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/rlSet4"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="#33000000"
+                    android:layout_margin="6dp"
+                    android:padding="4dp"
+                    android:orientation="vertical">
+
+                <TextView android:text="STREAM TYPE" android:textColor="@android:color/white"
+                          android:layout_alignParentBottom="true"
+                          android:layout_margin="2dp" android:textAlignment="center" android:textStyle="bold"
+                          android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+                <ImageView android:id="@+id/ivSet4" android:src="@drawable/set_stream_type" android:layout_width="wrap_content" android:tint="@color/selector_tint"
+                           android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                    android:id="@+id/rlSet5"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="#33000000"
+                    android:layout_margin="6dp"
+                    android:padding="4dp"
+                    android:orientation="vertical">
+
+                <TextView android:text="UPDATE CONTENT" android:textColor="@android:color/white"
+                          android:layout_alignParentBottom="true"
+                          android:layout_margin="2dp" android:textAlignment="center" android:textStyle="bold"
+                          android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+                <ImageView android:id="@+id/ivSet5" android:src="@drawable/set_update" android:layout_width="wrap_content" android:tint="@color/selector_tint"
+                           android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="0dp" android:layout_weight="1"
+                      android:paddingStart="20dp"
+                      android:paddingEnd="20dp"
+                      android:orientation="horizontal">
+
+
+            <RelativeLayout
+                    android:id="@+id/rlSet6"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="#33000000"
+                    android:layout_margin="6dp"
+                    android:padding="4dp"
+                    android:orientation="vertical">
+
+                <TextView android:text="EPG TIMESHIFT" android:textColor="@android:color/white"
+                          android:layout_alignParentBottom="true"
+                          android:layout_margin="2dp" android:textAlignment="center" android:textStyle="bold"
+                          android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+                <ImageView android:id="@+id/ivSet6" android:src="@drawable/set_epg" android:layout_width="wrap_content" android:tint="@color/selector_tint"
+                           android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/rlSet7"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="#33000000"
+                    android:layout_margin="6dp"
+                    android:padding="4dp"
+                    android:orientation="vertical">
+
+                <TextView android:text="PARENTAL" android:textColor="@android:color/white"
+                          android:layout_alignParentBottom="true"
+                          android:layout_margin="2dp" android:textAlignment="center" android:textStyle="bold"
+                          android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+                <ImageView android:id="@+id/ivSet7" android:src="@drawable/set_parentel" android:layout_width="wrap_content" android:tint="@color/selector_tint"
+                           android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                    android:id="@+id/rlSet8"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="#33000000"
+                    android:layout_margin="6dp"
+                    android:padding="4dp"
+                    android:orientation="vertical">
+
+                <TextView android:text="SPEED TEST" android:textColor="@android:color/white"
+                          android:layout_alignParentBottom="true"
+                          android:layout_margin="2dp" android:textAlignment="center" android:textStyle="bold"
+                          android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+                <ImageView android:id="@+id/ivSet8" android:src="@drawable/set_speedtest" android:layout_width="wrap_content" android:tint="@color/selector_tint"
+                           android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/rlSet9"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="#33000000"
+                    android:layout_margin="6dp"
+                    android:padding="4dp"
+                    android:orientation="vertical">
+
+                <TextView android:text="SUPPORT" android:textColor="@android:color/white"
+                          android:layout_alignParentBottom="true"
+                          android:layout_margin="2dp" android:textAlignment="center" android:textStyle="bold"
+                          android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+                <ImageView android:id="@+id/ivSet9" android:src="@drawable/set_support" android:layout_width="wrap_content" android:tint="@color/selector_tint"
+                           android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/rlSet10"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="#33000000"
+                    android:layout_margin="6dp"
+                    android:padding="4dp"
+                    android:orientation="vertical">
+
+                <TextView android:text="LOG OUT" android:textColor="@android:color/white"
+                          android:layout_alignParentBottom="true"
+                          android:layout_margin="2dp" android:layout_marginBottom="4dp" android:textAlignment="center" android:textStyle="bold"
+                          android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+                <ImageView android:id="@+id/ivSet10" android:src="@drawable/set_signout" android:layout_width="wrap_content" android:tint="@color/selector_tint"
+                           android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

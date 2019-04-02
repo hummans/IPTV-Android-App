@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/white"
+                android:background="@drawable/bg"
                 android:fitsSystemWindows="true">
 
     <ScrollView
@@ -11,53 +11,46 @@
             android:layout_height="wrap_content">
         <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="match_parent"
+                android:layout_width="480dp"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 android:paddingLeft="24dp"
                 android:paddingRight="24dp">
 
-            <ImageView android:src="@drawable/iptvmedya"
+            <ImageView android:src="@drawable/iptv"
                        android:layout_width="wrap_content"
-                       android:layout_height="200dp"
+                       android:layout_height="60dp"
                        android:layout_marginBottom="24dp"
                        android:layout_gravity="center_horizontal"/>
 
-            <TextView
-                    android:textSize="22sp"
-                    android:text="@string/app_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    android:textColor="@android:color/black"
-                    android:textAlignment="center"/>
-
             <!-- Email Label -->
-            <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/etUserName"
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:inputType="text"
-                          android:hint="Kullanıcı Adı"/>
-            </android.support.design.widget.TextInputLayout>
+            <EditText android:id="@+id/etUserName"
+                      android:layout_width="match_parent"
+                      android:layout_height="40dp"
+                      android:inputType="text"
+                      android:paddingStart="10dp"
+                      android:layout_marginTop="8dp"
+                      android:layout_marginBottom="8dp"
+                      android:drawableTint="@android:color/holo_blue_dark"
+                      android:drawablePadding="10dp"
+                      android:background="@drawable/bg_edittext_white"
+                      android:hint="Kullanıcı Adı"/>
 
             <!-- Password Label -->
-            <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/etPassword"
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:inputType="textPassword"
-                          android:hint="Şifre"/>
-            </android.support.design.widget.TextInputLayout>
+            <EditText android:id="@+id/etPassword"
+                      android:layout_width="match_parent"
+                      android:layout_height="40dp"
+                      android:layout_marginTop="8dp"
+                      android:layout_marginBottom="8dp"
+                      android:inputType="textPassword"
+                      android:background="@drawable/bg_edittext_white"
+                      android:paddingStart="10dp"
+                      android:hint="Şifre"/>
 
             <CheckBox android:id="@+id/cbRememberMe" android:text="Beni Hatırla" android:layout_width="match_parent"
+                      android:drawableTint="@android:color/white"
+                      android:textColor="@android:color/white"
+                      android:buttonTint="@android:color/white"
                       android:layout_height="wrap_content"/>
 
             <android.support.v7.widget.AppCompatButton
@@ -68,7 +61,7 @@
                     android:layout_marginBottom="18dp"
                     android:padding="12dp"
                     android:textColor="@android:color/white"
-                    android:background="@android:color/black"
+                    android:background="@android:color/holo_blue_light"
                     android:drawableRight="@drawable/ic_arrow_right_white"
                     android:text="Giriş"/>
 
@@ -76,6 +69,7 @@
             <LinearLayout android:orientation="horizontal"
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content"
+                          android:visibility="gone"
                           android:gravity="center">
 
                 <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
@@ -109,11 +103,11 @@
                       android:layout_width="fill_parent"
                       android:layout_height="wrap_content"
                       android:layout_marginBottom="24dp"
-                      android:text="IPTV Medya v1.0"
+                      android:text="Turkosat IPTV v1.0"
                       android:gravity="center"
                       android:textSize="12sp"
                       android:textColor="@android:color/darker_gray"
-                      android:layout_marginTop="20dp"/>
+                      android:layout_marginTop="10dp"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
