@@ -48,6 +48,9 @@ public class M3UParser {
                 if (dataArray[0].contains(EXT_LOGO)) {
                     String duration = dataArray[0].substring(0, dataArray[0].indexOf(EXT_LOGO)).replace(":", "").replace("\n", "");
                     String icon = dataArray[0].substring(dataArray[0].indexOf(EXT_LOGO) + EXT_LOGO.length()).replace("=", "").replace("\"", "").replace("\n", "");
+                    if (icon.contains(EXT_GROUP_TITLE)){
+                        icon = icon.substring(0, icon.indexOf(EXT_GROUP_TITLE)).trim();
+                    }
                     playlistItem.setItemDuration(duration);
                     playlistItem.setItemIcon(icon);
                 } else {

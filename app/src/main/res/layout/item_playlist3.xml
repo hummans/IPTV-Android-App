@@ -17,12 +17,12 @@
                    android:src="@drawable/placeholder" android:layout_width="125dp"
                    android:scaleType="centerInside"
                    android:layout_height="125dp"/>
-        <TextView android:layout_width="match_parent" android:layout_height="45dp" android:textSize="13.0sp"
+        <TextView android:layout_width="match_parent" android:layout_height="60dp" android:textSize="13.0sp"
                   android:textColor="@android:color/background_light"
                   android:gravity="center" android:layout_gravity="bottom|center"
                   android:id="@+id/item_name" android:background="#99000000" android:padding="4dp"
                   android:paddingBottom="5.0dip"
-                  android:text="CHANNEL NAME CHANNEL NAME 23344343" android:lines="2"/>
+                  android:text="CHANNEL NAME CHANNEL NAME 23344343" android:lines="3"/>
 
     </LinearLayout>
 </android.support.v7.widget.CardView>

@@ -47,7 +47,7 @@ class PlaylistAdapter : RecyclerView.Adapter<PlaylistAdapter.ViewHolder>(), Filt
         fun bind(model: M3UItem, listener: PlayItemSelectListener?) {
             name.text = model.itemName
           //  icon.setImageResource(icons[adapterPosition % icons.size])
-            Glide.with(icon.context).load(model.itemIcon).placeholder(R.drawable.placeholder).fitCenter().into(icon)
+            Glide.with(icon.context).load(model.itemIcon).fitCenter().placeholder(R.drawable.placeholder).fitCenter().into(icon)
 
             itemView.setOnClickListener { listener?.let { listener.onPlayItemSelected(model) } }
         }
