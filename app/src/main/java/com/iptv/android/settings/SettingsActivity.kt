@@ -5,9 +5,11 @@ import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import com.iptv.android.R
 import com.iptv.android.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_settings.*
+import java.net.URLEncoder
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -27,8 +29,7 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(browserIntent)
         }
         ivSet9.setOnClickListener {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.turkosat.com/"))
-            startActivity(browserIntent)
+            openWhatsapp()
         }
         ivSet10.setOnClickListener {
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
@@ -37,6 +38,28 @@ class SettingsActivity : AppCompatActivity() {
 
             startActivity(Intent(this@SettingsActivity, LoginActivity::class.java))
             finish()
+        }
+    }
+
+    private fun openWhatsapp() {
+        try {
+            val gsm = "+32460242927"
+            val intent = Intent(Intent.ACTION_VIEW)
+            val url =
+                "https://api.whatsapp.com/send?phone=$gsm&text=" + URLEncoder.encode(
+                    "Merhaba IPTV Medya,",
+                    "UTF-8"
+                )
+            intent.setPackage("com.whatsapp")
+            intent.data = Uri.parse(url)
+            if (intent.resolveActivity(packageManager) != null) {
+                startActivity(intent)
+            } else {
+
+            }
+        } catch (e: Exception) {
+            Log.e("ERROR WHATSAPP", e.toString())
+
         }
     }
 }

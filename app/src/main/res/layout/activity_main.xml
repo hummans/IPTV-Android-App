@@ -17,7 +17,7 @@
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:id="@+id/linearLayout">
 
-        <ImageView android:src="@drawable/iptv" android:layout_width="wrap_content" android:layout_height="60dp"/>
+        <ImageView android:src="@drawable/iptvmedya" android:layout_width="wrap_content" android:layout_height="90dp"/>
 
         <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
                       android:paddingStart="20dp"

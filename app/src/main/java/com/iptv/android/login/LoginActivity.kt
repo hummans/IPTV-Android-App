@@ -46,9 +46,9 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-//            file_url =
-//                    "http://goldiptv24.com:80/get.php?username=${etUserName.text}&password=${etPassword.text}&type=m3u_plus&output=ts"
-            file_url = "http://managercw.com:8000/get.php?username=${etUserName.text}&password=${etPassword.text}&type=m3u_plus&output=ts"
+            file_url =
+                    "http://goldiptv24.com:80/get.php?username=${etUserName.text}&password=${etPassword.text}&type=m3u_plus&output=ts"
+//            file_url = "http://managercw.com:8000/get.php?username=${etUserName.text}&password=${etPassword.text}&type=m3u_plus&output=ts"
             DownloadFileFromURL().execute(file_url)
         }
 

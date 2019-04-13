@@ -109,7 +109,7 @@ public class M3UParser {
             retList.add(data.get(key));
 
             for (M3UItem item : data.get(key).playlistItems){
-                Log.d("BURHAN", item.getItemIcon());
+                Log.d("BURHAN", item.toString());
             }
         }
 

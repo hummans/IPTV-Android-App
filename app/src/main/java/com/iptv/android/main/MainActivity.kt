@@ -15,20 +15,34 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val liveTvs = categories.filter { s ->
-            s.playlistItems.isNotEmpty() && (s.playlistItems[0].itemName?.contains("[")!! && s.playlistItems[0].itemName?.contains(
-                "]"
-            )!! || s.playlistItems[1].itemName?.contains("[")!! && s.playlistItems[1].itemName?.contains(
-                "]"
-            )!! || s.playlistItems[2].itemName?.contains("[")!! && s.playlistItems[2].itemName?.contains(
-                "]"
-            )!!)
+        val liveTvs = mutableListOf<M3UPlaylist>()
+        for (category in categories){
+            category.playlistItems?.let {
+                it[0]?.let {
+                    it.itemName?.let {
+                        if (it.contains("[") && it.contains("]")){
+                            liveTvs.add(category)
+                        }
+                    }
+                }
+            }
         }
-        val series = categories.filter { s ->
-            s.playlistItems.isNotEmpty() && (s.playlistItems[0].itemName?.contains("S01")!! || s.playlistItems[0].itemName?.contains(
-                "S02"
-            )!! || s.playlistItems[0].itemName?.contains("S03")!!)
+
+        val series = mutableListOf<M3UPlaylist>()
+        for (category in categories){
+            category.playlistItems?.let {
+                it[0]?.let {
+                    it.itemName?.let {
+                        if (it.contains("S01") ||  it.contains("S02")  ||  it.contains("S03")){
+                            series.add(category)
+                        }
+                    }
+                }
+            }
         }
+
+
+
         val radios = categories.filter { s ->
             s.playlistName.contains("radio", ignoreCase = true) || s.playlistName.contains(
                 "radyo",
@@ -63,6 +77,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+        }
+
+        for (i in vods.size - 1 downTo 0) {
+            if (vods[i].playlistItems!= null && vods[i].playlistItems.size > 0 && vods[i].playlistItems[0].itemUrl != null && !vods[i].playlistItems[0].itemUrl?.endsWith("mp4")!!) {
+                liveTvs.add(0,vods[i])
+                vods.removeAt(i)
+            }
         }
 
 

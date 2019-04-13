@@ -37,7 +37,7 @@ class CategoriesActivity : AppCompatActivity() {
         rvCategories.adapter = adapter
 
         rvCategoryItems.setHasFixedSize(true)
-        val layoutManagerCategoryItems = GridLayoutManager(this, 5)
+        val layoutManagerCategoryItems = GridLayoutManager(this, 4)
         rvCategoryItems.layoutManager = layoutManagerCategoryItems
         rvCategoryItems.adapter = adapterItems
 

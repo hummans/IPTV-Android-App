@@ -17,7 +17,7 @@
                 android:paddingLeft="24dp"
                 android:paddingRight="24dp">
 
-            <ImageView android:src="@drawable/iptv"
+            <ImageView android:src="@drawable/iptvmedya"
                        android:layout_width="wrap_content"
                        android:layout_height="60dp"
                        android:layout_marginBottom="24dp"
@@ -103,7 +103,7 @@
                       android:layout_width="fill_parent"
                       android:layout_height="wrap_content"
                       android:layout_marginBottom="24dp"
-                      android:text="Turkosat IPTV v1.0"
+                      android:text="IPTV Medya v1.0"
                       android:gravity="center"
                       android:textSize="12sp"
                       android:textColor="@android:color/darker_gray"
