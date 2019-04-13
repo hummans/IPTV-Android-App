@@ -16,9 +16,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val liveTvs = categories.filter { s ->
-            s.playlistItems.isNotEmpty() && s.playlistItems[0].itemName?.contains("[")!! && s.playlistItems[0].itemName?.contains(
+            s.playlistItems.isNotEmpty() && (s.playlistItems[0].itemName?.contains("[")!! && s.playlistItems[0].itemName?.contains(
                 "]"
-            )!!
+            )!! || s.playlistItems[1].itemName?.contains("[")!! && s.playlistItems[1].itemName?.contains(
+                "]"
+            )!! || s.playlistItems[2].itemName?.contains("[")!! && s.playlistItems[2].itemName?.contains(
+                "]"
+            )!!)
         }
         val series = categories.filter { s ->
             s.playlistItems.isNotEmpty() && (s.playlistItems[0].itemName?.contains("S01")!! || s.playlistItems[0].itemName?.contains(
@@ -78,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             CategoriesActivity.categories = radios
             startActivity(Intent(this@MainActivity, CategoriesActivity::class.java))
         }
-        iv_settings.setOnClickListener { startActivity(Intent(this@MainActivity, SettingsActivity::class.java))}
+        iv_settings.setOnClickListener { startActivity(Intent(this@MainActivity, SettingsActivity::class.java)) }
     }
 
     companion object {

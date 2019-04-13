@@ -10,4 +10,9 @@ class M3UItem : Serializable {
     var itemIcon: String? = null
     var groupTitle: String? = null
 
+    override fun toString(): String {
+        return "M3UItem(itemDuration=$itemDuration, itemName=$itemName, itemUrl=$itemUrl, itemIcon=$itemIcon, groupTitle=$groupTitle)"
+    }
+
+
 }

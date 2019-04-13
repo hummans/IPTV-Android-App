@@ -107,6 +107,10 @@ public class M3UParser {
         List<M3UPlaylist> retList = new ArrayList<>();
         for (String key : data.keySet()) {
             retList.add(data.get(key));
+
+            for (M3UItem item : data.get(key).playlistItems){
+                Log.d("BURHAN", item.getItemIcon());
+            }
         }
 
         return retList;

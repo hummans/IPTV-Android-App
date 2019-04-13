@@ -10,4 +10,12 @@ public class M3UPlaylist implements Serializable {
 
     public String playlistName;
     public List<M3UItem> playlistItems = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "M3UPlaylist{" +
+                "playlistName='" + playlistName + '\'' +
+                ", playlistItems=" + playlistItems +
+                '}';
+    }
 }
