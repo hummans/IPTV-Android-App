@@ -21,7 +21,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.iptv.android2"
+        applicationId "com.iptv.medya"
         manifestPlaceholders = [
                 onesignal_app_id               : '70c498a3-2dd6-40f1-ba51-a19ac082dc92',
                 onesignal_google_project_number: 'REMOTE'
