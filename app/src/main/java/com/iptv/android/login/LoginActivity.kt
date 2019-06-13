@@ -47,6 +47,7 @@ class LoginActivity : AppCompatActivity() {
 
             file_url =
                     "http://goldiptv24.com:80/get.php?username=${etUserName.text}&password=${etPassword.text}&type=m3u_plus&output=ts"
+            Log.d("Login","Url is $file_url")
             DownloadFileFromURL().execute(file_url)
         }
 

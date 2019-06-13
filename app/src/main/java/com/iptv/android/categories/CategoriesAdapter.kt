@@ -57,7 +57,7 @@ class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>(), 
 //            icon.setImageDrawable(textDrawable)
             model.playlistItems?.let { totalCount.text = "Toplam Yayın: ${model.playlistItems.size}" }
 
-            itemView.setOnClickListener { listener?.let { listener.onCategorySelected(model) } }
+            itemView.setOnClickListener { listener?.let { listener.onCategorySelected(model, adapterPosition) } }
         }
     }
 
@@ -96,6 +96,6 @@ class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>(), 
 
 
     interface CategorySelectListener {
-        fun onCategorySelected(category: M3UPlaylist)
+        fun onCategorySelected(category: M3UPlaylist, categoryIndex: Int = 0)
     }
 }

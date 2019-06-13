@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:keepScreenOn="true"
-              tools:context=".player.PlayerExo">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:keepScreenOn="true"
+                tools:context=".player.PlayerExo">
 
 
     <com.devbrackets.android.exomedia.ui.widget.VideoView
@@ -21,6 +21,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:mediaRouteTypes="user"
-            android:visibility="visible" />
+            android:visibility="visible"/>
 
+    <FrameLayout
+            android:id="@+id/containerPlayerChannelList"
+            android:layout_width="320dp"
+            android:background="#66000000"
+            android:visibility="gone"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"/>
 </RelativeLayout>

@@ -47,7 +47,7 @@ class PlaylistAdapter : RecyclerView.Adapter<PlaylistAdapter.ViewHolder>(), Filt
             name.text = model.itemName
    //         icon.setImageResource(icons[adapterPosition % icons.size])
 
-            itemView.setOnClickListener { listener?.let { listener.onPlayItemSelected(model) } }
+            itemView.setOnClickListener { listener?.let { listener.onPlayItemSelected(model, adapterPosition) } }
         }
 
         private var icons =
@@ -89,6 +89,6 @@ class PlaylistAdapter : RecyclerView.Adapter<PlaylistAdapter.ViewHolder>(), Filt
 
 
     interface PlayItemSelectListener {
-        fun onPlayItemSelected(m3UItem: M3UItem)
+        fun onPlayItemSelected(m3UItem: M3UItem, channelIndex: Int = 0)
     }
 }

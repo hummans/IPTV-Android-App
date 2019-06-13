@@ -5,18 +5,25 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.MediaRouteButton;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import com.devbrackets.android.exomedia.ui.widget.VideoView;
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.framework.*;
 import com.google.android.gms.cast.framework.media.RemoteMediaClient;
 import com.iptv.android.R;
+import com.iptv.android.player.channellist.PlayerChannelListFragment;
+import com.iptv.android.player.channellist.dummy.DummyContent;
+import com.muparse.M3UItem;
+import org.jetbrains.annotations.Nullable;
 
-public class PlayerExo extends AppCompatActivity implements com.devbrackets.android.exomedia.listener.OnPreparedListener {
+public class PlayerExo extends AppCompatActivity implements com.devbrackets.android.exomedia.listener.OnPreparedListener, PlayerChannelListFragment.OnPlayerChannelListFragmentInteractionListener {
 
     private static final String TAG = "BURHAN";
     VideoView videoView;
     private String url = "";
+    private int selectedCategoryIndex = 0;
+    private int selectedChannelIndex = 0;
 
     private CastSession mCastSession;
     private SessionManager mSessionManager;
@@ -40,11 +47,14 @@ public class PlayerExo extends AppCompatActivity implements com.devbrackets.andr
         videoView.setOnPreparedListener(this);
         try {
             url = bundle.getString("Url");
+            selectedCategoryIndex = bundle.getInt("selectedCategoryIndex");
+            selectedChannelIndex = bundle.getInt("selectedChannelIndex");
             videoView.setVideoURI(Uri.parse(bundle.getString("Url")));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+      //  getSupportFragmentManager().beginTransaction().add(R.id.containerPlayerChannelList, PlayerChannelListFragment.Companion.newInstance(selectedCategoryIndex, selectedChannelIndex)).commit();
 
     }
 
@@ -78,6 +88,21 @@ public class PlayerExo extends AppCompatActivity implements com.devbrackets.andr
         super.onPause();
         mSessionManager.removeSessionManagerListener(mSessionManagerListener);
         mCastSession = null;
+    }
+
+    @Override
+    public void onBackPressed() {
+        View channelList = findViewById(R.id.containerPlayerChannelList);
+        if (channelList.getVisibility() == View.VISIBLE){
+            channelList.setVisibility(View.GONE);
+        }else{
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onChannelSelected(@Nullable M3UItem item) {
+        videoView.setVideoURI(Uri.parse(item.getItemUrl()));
     }
 
 

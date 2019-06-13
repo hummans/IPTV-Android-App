@@ -34,11 +34,12 @@ class CategoriesActivity : AppCompatActivity() {
         adapter.apply {
             data = categories
             listener = object : CategoriesAdapter.CategorySelectListener {
-                override fun onCategorySelected(category: M3UPlaylist) {
+                override fun onCategorySelected(category: M3UPlaylist, categoryIndex: Int) {
                     category.playlistName?.let { name ->
                         Log.d(TAG, "$name category selected")
                         val intent = Intent(this@CategoriesActivity, ListActivity::class.java)
                         ListActivity.m3UPlaylist = category.playlistItems
+                        ListActivity.selectedCategoryIndex = categoryIndex
                         startActivity(intent)
                     }
                 }

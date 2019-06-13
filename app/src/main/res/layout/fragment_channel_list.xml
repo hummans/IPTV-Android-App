@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+        <ImageView
+                android:id="@+id/ivPlayerPreviousCategory"
+                android:src="@drawable/ic_backward"
+                android:tint="@android:color/white"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+        <TextView
+                android:id="@+id/tvPlayerCategoryName"
+                android:text="Category Name"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:layout_height="40dp"/>
+        <ImageView
+                android:id="@+id/ivPlayerNextCategory"
+                android:src="@drawable/ic_forward"
+                android:tint="@android:color/white"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/list"
+            android:name="com.iptv.android.player.channellist.PlayerChannelListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="LinearLayoutManager"
+            tools:context="com.iptv.android.player.channellist.PlayerChannelListFragment"
+            tools:listitem="@layout/item_player_channel"/>
+</LinearLayout>
